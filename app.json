@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/graph/index",
+    "pages/home/home",
+    "pages/logs/logs",
+    "pages/index/index",
+    "pages/figure-add/figure-add"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "backgroundColor": "#eee",
+    "navigationBarBackgroundColor": "#eee",
+    "navigationBarTitleText": "ECharts 图表示例",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "useExtendedLib": {
+    "kbone": true,
+    "weui": true
+  }
+}

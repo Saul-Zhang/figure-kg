@@ -1,0 +1,70 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- <button class="btn" bindtap="popup" data-position="right">右侧弹出</button> -->
+  <!-- <button bindtap="addVertex">添加节点</button> -->
+  <!-- <button bindtap="addEdge">添加边</button> -->
+  <!-- <l-button type="default" bindtap="addFigure" data-bookId="10">添加人物</l-button> -->
+  <view>《暗夜与黎明》主要人物关系图</view>
+  <l-button type="default" bindtap="popup" plain="true" data-position="right">添加人物</l-button>
+  <ec-canvas id="mychart-grap" canvas-id="mychart-pie" ec="{{ ec }}"></ec-canvas>
+</view>
+<page-container show="{{show}}" round="{{round}}" overlay="{{overlay}}" duration="{{duration}}" position="{{position}}"
+  close-on-slide-down="{{false}}" bindbeforeenter="onBeforeEnter" bindenter="onEnter" bindafterenter="onAfterEnter"
+  bindbeforeleave="onBeforeLeave" bindleave="onLeave" bindafterleave="onAfterLeave" bindclickoverlay="onClickOverlay"
+  custom-style="{{customStyle}}" overlay-style="{{overlayStyle}}">
+  <scroll-view scroll-y="true" style="height: 1024rpx;" bindscrolltoupper="upper" bindscrolltolower="lower"
+    bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+
+    <view class='buttun-wrapper'>
+      <l-form catchsubmit="saveFigure" bind:linsubmit="saveFigure" name="figureInfo"
+        l-form-btn-class="l-form-btn-class">
+        <l-form-item name="userName" rules="{{figureInfo.nameRules}}">
+          <l-input label="姓名:" show-row="{{false}}" id="userName" placeholder="在这里输入人物的姓名" value='{{figureInfo.name}}'
+            required="{{true}}" />
+        </l-form-item>
+        <l-input label="备注:" placeholder="可用于人物别名或区分同名人物" value='{{figureInfo.remark}}' />
+        <!-- <l-input label="别名" placeholder="人物有其他常用名可写在这里" value='{{figureInfo.alias}}' /> -->
+        <l-form-item class="font-class" label="人物描述:" name='desc'>
+          <l-textarea value='{{figureInfo.desc}}' id='desc' l-class="l-input-container-class" border="{{false}}" />
+        </l-form-item>
+        <block wx:for="{{relationList}}" wx:key="item">
+          <view class='row'></view>
+          <l-slide-view height="220" width="750" slide-width="140" auto-close="true" close="true">
+            <view slot="left">
+              <view class="weui-cell weui-cell_select">
+                <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                  <view class="font-class">关联人物</view>
+                </view>
+                <view class="weui-cell__bd">
+                  <picker data-index="{{index}}" bindchange="bindFigureChange" value="{{figureIndex[index]}}"
+                    range="{{figures}}" range-key="{{'name'}}">
+                    <view class="weui-select weui-select_in-select-after font-class">
+                      {{figures[figureIndex[index]].name}}</view>
+                  </picker>
+                </view>
+              </view>
+              <l-input label="关系" placeholder="请输入人物之间的关系" bind:linblur="relationInput" data-index="{{index}}"
+                value='{{relationList[index].relation}}' />
+
+            </view>
+            <view slot="right" class="right">
+              <text bindtap="deleteRelation" data-index="{{index}}">删 除</text>
+            </view>
+          </l-slide-view>
+          <view class='row'></view>
+        </block>
+
+        <view class="flex-row-class">
+          <l-icon name="add" bindtap="addRelation" /> <text bindtap="addRelation">添加关系</text>
+        </view>
+
+        <view slot="submit">
+          <l-button type="success" form-type="submit">保存</l-button>
+        </view>
+        <view slot="reset">
+          <l-button type="default" bindtap="exit" plain>取消</l-button>
+        </view>
+      </l-form>
+    </view>
+  </scroll-view>
+</page-container>

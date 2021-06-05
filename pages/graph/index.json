@@ -1,0 +1,17 @@
+{
+  "usingComponents": {
+    "ec-canvas": "../../ec-canvas/ec-canvas",
+    
+    "l-button":"/miniprogram_npm/lin-ui/button/index",
+    "l-popup":"/miniprogram_npm/lin-ui/popup/index",
+    "l-form":"/miniprogram_npm/lin-ui/form/index",
+    "l-input":"/miniprogram_npm/lin-ui/input/index",
+    "l-textarea":"/miniprogram_npm/lin-ui/textarea/index",
+    "l-form-item":"/miniprogram_npm/lin-ui/form-item/index",
+    "l-icon":"/miniprogram_npm/lin-ui/icon/index",
+    "l-slide-view":"/miniprogram_npm/lin-ui/slide-view/index",
+    "l-toast":"/miniprogram_npm/lin-ui/toast/index",
+
+    "mp-form": "weui-miniprogram/form/form"
+  }
+}

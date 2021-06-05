@@ -1,0 +1,9 @@
+<view class="page-body">
+  <view class="page__hd">
+        <view class="page__title">SearchBar</view>
+        <image bindtap="bindViewTap"   src="https://res.wx.qq.com/wxdoc/dist/assets/img/0.4cb08bb4.jpg" mode="cover"></image>
+    </view>
+    <view class="page__bd">
+        <mp-searchbar bindselectresult="selectResult" search="{{search}}" placeholder="请输入书名搜索"></mp-searchbar>
+    </view>
+</view>
