@@ -145,4 +145,11 @@ page-container{
 }
 /** 清除滚动禁止代码 ent **/
 
+.form-item-container .label-text-required::before {
+  display: inline-block;
+  margin-right: 4px;
+  color: #f34c55;
+  font-family: SimSun,sans-serif;
+  content: "" !important;
+  }
 

@@ -16,44 +16,51 @@
     bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
 
     <view class='buttun-wrapper'>
-      <l-form catchsubmit="saveFigure" bind:linsubmit="saveFigure" name="figureInfo"
-        l-form-btn-class="l-form-btn-class">
-        <l-form-item name="userName" rules="{{figureInfo.nameRules}}">
-          <l-input label="姓名:" show-row="{{false}}" id="userName" placeholder="在这里输入人物的姓名" value='{{figureInfo.name}}'
+      <l-form catchsubmit="saveFigure" bind:linsubmit="saveFigure" name="info" l-form-btn-class="l-form-btn-class">
+        <l-form-item name="name" rules="{{nameRules}}">
+          <l-input label="姓名:" show-row="{{false}}" id="name" placeholder="在这里输入人物的姓名" value='{{figureInfo.name}}'
             required="{{true}}" />
         </l-form-item>
-        <l-input label="备注:" placeholder="可用于人物别名或区分同名人物" value='{{figureInfo.remark}}' />
-        <!-- <l-input label="别名" placeholder="人物有其他常用名可写在这里" value='{{figureInfo.alias}}' /> -->
+        <l-form-item name="remark" rules="{{figureInfo.remark}}">
+          <l-input label="备注:" id='remark' placeholder="可用于人物别名或区分同名人物" value='{{figureInfo.remark}}' />
+        </l-form-item>
+
         <l-form-item class="font-class" label="人物描述:" name='desc'>
           <l-textarea value='{{figureInfo.desc}}' id='desc' l-class="l-input-container-class" border="{{false}}" />
         </l-form-item>
-        <block wx:for="{{relationList}}" wx:key="item">
-          <view class='row'></view>
-          <l-slide-view height="220" width="750" slide-width="140" auto-close="true" close="true">
-            <view slot="left">
-              <view class="weui-cell weui-cell_select">
-                <view class="weui-cell__hd weui-cell__hd_in-select-after">
-                  <view class="font-class">关联人物</view>
+       
+          <block wx:for="{{relationList}}" wx:key="item">
+            <view class='row'></view>
+            <!-- <l-form-item   name='relationList'> -->
+            <l-slide-view height="220" width="750" slide-width="140" auto-close="true" close="true">
+              <view slot="left">
+                <view class="weui-cell weui-cell_select">
+                  <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="font-class">关联人物:</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                    <picker data-index="{{index}}" bindchange="bindFigureChange" value="{{figureIndex[index]}}"
+                      range="{{figures}}" range-key="{{'name'}}">
+                      <view class="weui-select weui-select_in-select-after font-class">
+                        {{figures[figureIndex[index]].name}}</view>
+                    </picker>
+                  </view>
                 </view>
-                <view class="weui-cell__bd">
-                  <picker data-index="{{index}}" bindchange="bindFigureChange" value="{{figureIndex[index]}}"
-                    range="{{figures}}" range-key="{{'name'}}">
-                    <view class="weui-select weui-select_in-select-after font-class">
-                      {{figures[figureIndex[index]].name}}</view>
-                  </picker>
-                </view>
+                <l-form-item class="font-class" name='relationList'>
+                  <l-input label="关系:" id="relationList" placeholder="请输入人物之间的关系" bind:linblur="relationInput"
+                    data-index="{{index}}" value='{{figureInfo.relationList[index].relation}}' />
+                </l-form-item>
+              
+
               </view>
-              <l-input label="关系" placeholder="请输入人物之间的关系" bind:linblur="relationInput" data-index="{{index}}"
-                value='{{relationList[index].relation}}' />
-
-            </view>
-            <view slot="right" class="right">
-              <text bindtap="deleteRelation" data-index="{{index}}">删 除</text>
-            </view>
-          </l-slide-view>
-          <view class='row'></view>
-        </block>
-
+              <view slot="right" class="right">
+                <text bindtap="deleteRelation" data-index="{{index}}">删 除</text>
+              </view>
+            </l-slide-view>
+            <view class='row'></view>
+          <!-- </l-form-item> -->
+          </block>
+        
         <view class="flex-row-class">
           <l-icon name="add" bindtap="addRelation" /> <text bindtap="addRelation">添加关系</text>
         </view>
@@ -66,5 +73,10 @@
         </view>
       </l-form>
     </view>
+
+
+
   </scroll-view>
+  <l-toast></l-toast>
+  <l-message></l-message>
 </page-container>

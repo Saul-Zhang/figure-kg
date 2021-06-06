@@ -30,19 +30,19 @@ Page({
     relationList: [{}],
     //保存一个人物的信息
     figureInfo: {
-      userName: '',
+      name: '',
+      remark:'',
       desc: '',
       relationList: [{}],
+      },
       nameRules: {
-        type: 'email',
+        // pattern: '^\s*$',
+        // pattern: '^[A-Za-z0-9]+$',
         required: true,
+        whitespace: true,
         message: '姓名不能为空',
-        trigger: 'blur'
-      }
+        trigger: 'change'
     },
-    // tipType: 'toast',
-
-
   },
   /**
    * 生命周期函数--监听页面显示
@@ -58,6 +58,7 @@ Page({
    */
   onLoad: function (options) {
     this.echartsComponnet = this.selectComponent('#mychart-grap');
+    // form 组件初始化
     wx.lin.initValidateForm(this)
   },
   // <!--获取到数据后，初始化报表-->
@@ -362,6 +363,7 @@ Page({
   addRelation() {
     console.log(this.data.figureInfo)
     var list = this.data.relationList;
+    console.log(list)
     list.push({})
     var index = this.data.figureIndex;
     index.push(0)
@@ -387,6 +389,8 @@ Page({
       detail
     } = e;
     console.log(detail)
+    // console.log(this.data.figureInfo)
+    // console.log(this.data.info)
   },
   formSubmit(e) {
     console.log('form发生了submit事件，携带数据为：', e.detail.value)
